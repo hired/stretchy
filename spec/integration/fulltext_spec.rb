@@ -11,9 +11,9 @@ describe 'fulltext searching' do
     expect(res.index(found['id'])).to be > res.index(not_found['id'])
   end
 
-  it 'must match at least one terms' do
-    res = subject.fulltext('Developer').ids
-    expect(res).to match_array([found['id']])
+  it 'can boost by fulltext' do
+    res = subject.boost.fulltext('_all' => 'Game Developer', weight: 1000).ids
+    expect(res.index(found['id'])).to be < res.index(not_found['id'])
   end
 
 end
