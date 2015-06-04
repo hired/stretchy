@@ -41,20 +41,37 @@ module Stretchy
       # options (ie, documents that *do not* match the query will
       # be boosted)
       # 
-      # @overload not(opts_or_string)
+      # @overload not(params)
       #   @param [String] String that must not match anywhere in the document
       # 
-      # @overload not(opts_or_string)
-      #   @param opts_or_string [Hash] Fields and values that should not match in the document
+      # @overload not(params)
+      #   @param params [Hash] Fields and values that should not match in the document
       # 
       # @return [BoostMatchClause] Query with inverse matching boost function applied
-      def not(opts_or_string = {})
+      def not(params = {})
         @inverse = true
-        if opts_or_string.is_a?(Hash)
-          match_function(opts_or_string)
-        else
-          match_function('_all' => opts_or_string)
-        end
+        params    = hashify_params(params)
+        weight    = params.delete(:weight)
+        clause    = MatchClause.tmp.not(params)
+        boost     = clause.to_boost(weight)
+        base.boost_builder.add_boost(boost)
+        self
+      end
+
+      # 
+      # Boosts based on a proximity match. Similar to {MatchClause#fulltext},
+      # except merely uses the proximity boost to affect the output of the query.
+      # 
+      # @param params = {} [Hash] Fields and values to add the full text boost
+      #   @option params [Numeric] :weight (1.2) The weight to give this boost function
+      # 
+      # @return [self] Allows continuing the query chain
+      def fulltext(params = {})
+        params    = hashify_params(params)
+        weight    = params.delete(:weight)
+        clause    = MatchClause.tmp(params, type: :phrase, slop: 50)
+        boost     = clause.to_boost(weight)
+        base.boost_builder.add_boost(boost)
         self
       end
 

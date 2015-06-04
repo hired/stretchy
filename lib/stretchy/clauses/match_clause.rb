@@ -17,29 +17,29 @@ module Stretchy
       # used in {BoostClause} for boosting on full-text
       # matches.
       # 
-      # @param options = {} [Hash] Options to pass to the full-text match
+      # @param params = {} [Hash] Params to pass to the full-text match
+      # @param options = {} [Hash] Options to be passed to the underlying {MatchQuery}
       # 
       # @return [MatchClause] Temporary clause outside current state
-      def self.tmp(options = {})
-        if options.delete(:inverse)
-          self.new(Builders::ShellBuilder.new).not(options)
-        else
-          self.new(Builders::ShellBuilder.new, options)
-        end
+      def self.tmp(params = {}, options = {})
+        self.new(Builders::ShellBuilder.new, params, options)
       end
 
       # 
       # Creates a new state with a match query applied.
       # 
-      # @overload initialize(base, opts_or_string)
+      # @overload initialize(base, params)
       #   @param [Base] Base clause to copy data from
       #   @param [String] Performs a full-text query for this string on all fields in the document.
       # 
-      # @overload initialize(base, opts_or_string)
+      # @overload initialize(base, params)
       #   @param [Base] Base clause to copy data from
       #   @param [Hash] A hash of fields and values to perform full-text matches with
-      #   @option opts_or_string [String] :operator ('and') Allows switching from the default 'and' 
-      #      operator to 'or', for all the specified fields
+      # 
+      # @overload initialize(base, params, options)
+      #   @param [Base] Builder to use
+      #   @param [Hash] A hash of fields and values to perform full-text matches with
+      #   @param [Hash] A hash of options to pass to the generated {MatchQuery}
       # 
       # @example A basic full-text match
       #   query.match("anywhere in document")
@@ -58,9 +58,9 @@ module Stretchy
       #   )
       # 
       # @see http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html Elastic Docs - Match Query
-      def initialize(base, opts_or_str = {})
+      def initialize(base, params = {}, options = {})
         super(base)
-        add_params(opts_or_str)
+        add_params(params, options)
       end
 
       # 

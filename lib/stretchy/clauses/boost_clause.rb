@@ -41,13 +41,13 @@ module Stretchy
       # {MatchClause#initialize}, but the combined query
       # will be applied as a boost function.
       # 
-      # @param options = {} [Hash] options for full text matching
+      # @param params = {}  [Hash] Params for full text matching
+      # @param options = {} [Hash] Options for the underlying {MatchQuery}
       # 
       # @return [BoostMatchClause] query with boost match state
-      def match(options = {})
-        BoostMatchClause.new(base, options)
+      def match(params = {}, options = {})
+        BoostMatchClause.new(base, params, options)
       end
-      alias :fulltext :match
 
       # 
       # Changes query state to "where" in the context

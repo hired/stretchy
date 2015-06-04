@@ -294,6 +294,12 @@ module Stretchy
         @query_results ||= Stretchy::Results::Base.new(base)
       end
 
+      protected
+
+        def hashify_params(params = {})
+          params.is_a?(Hash) ? params : {'_all' => params}
+        end
+
     end
   end
 end

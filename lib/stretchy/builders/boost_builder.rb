@@ -2,6 +2,10 @@ module Stretchy
   module Builders
     class BoostBuilder
 
+      extend Forwardable
+
+      delegate [:any?, :count, :length] => :functions
+
       attr_accessor :functions, :overall_boost, :max_boost, :score_mode, :boost_mode
 
       def initialize
@@ -12,8 +16,8 @@ module Stretchy
         @boost_mode     = 'sum'
       end
 
-      def any?
-        @functions.any?
+      def add_boost(boost)
+        @functions << boost
       end
 
       def to_search(query_or_filter)
