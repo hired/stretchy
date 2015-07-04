@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe Stretchy do
   it 'has a version number' do
+    puts "Stretchy: #{Stretchy.inspect} #{Stretchy.class}"
+    puts "Stretchy: #{Stretchy::VERSION}"
     expect(Stretchy::VERSION).not_to be nil
   end
 
@@ -15,8 +17,8 @@ describe Stretchy do
 
   it 'passes from and size arguments correctly' do
     expect(Stretchy.client).to receive(:search).with(
-      index: Stretchy.index_name, 
-      type: FIXTURE_TYPE, 
+      index: Stretchy.index_name,
+      type: FIXTURE_TYPE,
       body: {:query=>{:match_all=>{}}},
       explain: true,
       size: 20,

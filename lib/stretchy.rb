@@ -7,16 +7,16 @@ require 'virtus'
 require 'validation'
 
 require 'stretchy_validations'
-require 'stretchy/utils'
-require 'stretchy/errors'
-require 'stretchy/types'
-require 'stretchy/queries'
-require 'stretchy/filters'
-require 'stretchy/queries'
 require 'stretchy/boosts'
 require 'stretchy/builders'
-require 'stretchy/results'
 require 'stretchy/clauses'
+require 'stretchy/errors'
+require 'stretchy/filters'
+require 'stretchy/queries'
+require 'stretchy/results'
+require 'stretchy/types'
+require 'stretchy/utils'
+require 'stretchy/version'
 
 # {include:file:README.md}
 
