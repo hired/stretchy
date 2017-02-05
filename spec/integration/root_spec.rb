@@ -32,4 +32,20 @@ describe 'Root actions' do
     expect(results.first['_explanation']).to_not be_empty
   end
 
+  it 'sorts ascending by default' do
+    expect(subject.sort('url_slug').to_a[0]['url_slug']).to eq('masahiro-sakurai')
+    expect(subject.sort('url_slug').to_a[1]['url_slug']).to eq('suda-51')
+    expect(subject.sort('url_slug').to_a[2]['url_slug']).to eq('tetsuya-mizuguchi')
+  end
+
+  it 'sorts descending' do
+    expect(subject.sort(url_slug: {order: :desc}).to_a[0]['url_slug']).to eq('tetsuya-mizuguchi')
+    expect(subject.sort(url_slug: {order: :desc}).to_a[1]['url_slug']).to eq('suda-51')
+    expect(subject.sort(url_slug: {order: :desc}).to_a[2]['url_slug']).to eq('masahiro-sakurai')
+  end
+
+  it 'sorts by multiple fields' do
+    expect(subject.sort('_type', 'url_slug').to_a[0]['url_slug']).to eq('masahiro-sakurai')
+    expect(subject.sort('_type', url_slug: {order: :desc}).to_a[2]['url_slug']).to eq('masahiro-sakurai')
+  end
 end

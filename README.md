@@ -79,6 +79,7 @@ From here, you can chain the following query methods:
 * [explain](#explain) - Return score explanations along with documents
 * [fields](#fields) - Only return the specified fields
 * [page](#limit) - Limit, Offset, and Page to define which results to return
+* [sort](#sort) - Sorting fields
 
 ### A note on chaining:
 
@@ -365,6 +366,18 @@ query = query.page(50, per_page: 20)
 ```
 
 Works the same way as ActiveRecord's limit and offset methods - analogous to Elasticsearch's `from` and `size` parameters. The `.page` method allows you to set both at once, and is compatible with the [Kaminari gem](https://github.com/amatsuda/kaminari).
+
+### <a id="sort"></a>Sort
+
+```ruby
+query = query.sort('name')
+# or...
+query = query.sort('name', 'age')
+# or...
+query = query.sort(name: {order: :desc})
+```
+
+Return data sorted by specified field(s). It accepts params used by [ElasticSearch Sort](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html).
 
 ### <a id="explain"></a>Explain
 

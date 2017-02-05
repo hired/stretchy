@@ -105,6 +105,10 @@ module Stretchy
       add_nodes Factory.fulltext_nodes_from_string(params, context)
     end
 
+    def sort(*list)
+      add_body sort: list
+    end
+
     def query(params = {})
       add_params params, :query, :raw_node
     end
