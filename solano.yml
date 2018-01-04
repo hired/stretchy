@@ -1,6 +1,6 @@
 ---
-ruby_version: ruby-2.2.3
-bundler_version: 1.13.7
+ruby_version: ruby-2.4.2
+bundler_version: 1.14.6
 test_pattern:
   - spec/**/*_spec.rb
 elasticsearch:
