@@ -27,5 +27,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "fuubar",         "~> 2.0"
   spec.add_development_dependency "pry",            "~> 0.10"
   spec.add_development_dependency "awesome_print",  "~> 1.6"
-  spec.add_development_dependency "yard",           "~> 0.8"
+  spec.add_development_dependency "yard",           "~> 0.9"
 end
