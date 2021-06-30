@@ -43,7 +43,7 @@ module Stretchy
     end
 
     def total
-      response['hits']['total']
+      response['hits']['total']['value']
     end
     alias :total_count  :total
     alias :count        :total
