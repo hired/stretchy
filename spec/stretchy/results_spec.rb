@@ -30,7 +30,7 @@ module Stretchy
 
     describe '#total' do
       it 'matches response total' do
-        expect(subject.total).to eq(response['hits']['total'])
+        expect(subject.total).to eq(response['hits']['total']['value'])
       end
     end
 

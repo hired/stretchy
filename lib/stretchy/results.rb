@@ -1,3 +1,4 @@
+require 'json'
 module Stretchy
   class Results
 
@@ -12,7 +13,10 @@ module Stretchy
     def self.fake
       self.new(
         {size: API::DEFAULT_PER_PAGE, fake: true},
-        {'hits' => {'total' => 0, 'hits' => [], 'aggregations' => {}}}
+        {'hits' => {'total' => {
+          "value" => 3,
+          "relation" => "eq"
+      }, 'hits' => [], 'aggregations' => {}}}
       )
     end
 
