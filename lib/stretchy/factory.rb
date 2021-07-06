@@ -94,7 +94,11 @@ module Stretchy
         when Hash
           nested(val, field, context)
         else
-          Node.new({match: {field => val}}, context)
+          if field == '_all' 
+            Node.new({multi_match: {:query => val}}, context)
+          else
+            Node.new({match: {field => val}}, context)
+          end
         end
       end
     end
