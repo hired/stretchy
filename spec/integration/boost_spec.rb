@@ -6,7 +6,7 @@ describe 'Boosts', :integration do
   end
 
   specify 'query' do
-    check_boost subject.boost.query(match: {_all: found['name']}, weight: 10)
+    check_boost subject.boost.query(multi_match: {query: found['name']}, weight: 10)
   end
 
   specify 'where' do
@@ -28,7 +28,7 @@ describe 'Boosts', :integration do
   end
 
   specify 'match' do
-    check_boost subject.boost.match(_all: found['name'])
+    check_boost subject.boost.match(name: found['name'])
   end
 
   describe 'field value' do
@@ -54,7 +54,7 @@ describe 'Boosts', :integration do
   end
 
   describe 'random value' do
-    let(:seed) { 6 }
+    let(:seed) { 22 }
 
     # fortunately, 'random' has a seed
     # unfortunately, when elasticsearch version changes, we may have
@@ -90,14 +90,14 @@ describe 'Boosts', :integration do
   describe 'function_score options' do
     specify 'from boost' do
       q = subject.boost(score_mode: :min)
-        .boost.match(_all: 'game', weight: 2)
-        .boost.match(_all: 'video', weight: 1000)
+        .boost.match(bio: 'game', weight: 2)
+        .boost.match(bio: 'video', weight: 1000)
       expect(q.scores.all?{|k,s| s < 1000}).to eq(true)
     end
 
     specify 'within boost' do
-      q = subject.boost.match(_all: 'game', weight: 2, score_mode: :min)
-        .boost.match(_all: 'video', weight: 1000)
+      q = subject.boost.match(bio: 'game', weight: 2, score_mode: :min)
+        .boost.match(bio: 'video', weight: 1000)
       expect(q.scores.all?{|k,s| s < 1000}).to eq(true)
     end
 

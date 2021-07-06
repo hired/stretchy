@@ -5,7 +5,7 @@ module Stretchy
 
     class MyModel
       include Stretchy::Scopes
-      stretchify index: SPEC_INDEX, type: FIXTURE_TYPE
+      stretchify index: SPEC_INDEX
       stretch :sakurai, -> { match(name: 'sakurai') }
       stretch :with_salary, ->(num) { where(salary: num) }
     end

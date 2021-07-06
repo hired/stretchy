@@ -52,7 +52,7 @@ Stretchy.client = Elasticsearch::Client.new
 
 ```ruby
 # returns a Stretchy::API object
-api = Stretchy.query(index: 'myapp_development', type: 'model_name')
+api = Stretchy.query(index: 'myapp_development')
 ```
 
 From here, you can chain the methods to build your desired query.

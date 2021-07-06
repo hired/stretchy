@@ -2,8 +2,8 @@ require 'spec_helper'
 
 module Stretchy
   describe API do
-
-    let(:api) { API.new(index: SPEC_INDEX, type: FIXTURE_TYPE) }
+ 
+    let(:api) { API.new(index: SPEC_INDEX) }
     subject   { api }
 
     describe 'pagination' do

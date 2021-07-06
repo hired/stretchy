@@ -5,7 +5,7 @@ describe 'merging queries' do
   let(:not_found) { fixture(:mizuguchi) }
 
   def api
-    Stretchy.query(index: SPEC_INDEX, type: FIXTURE_TYPE)
+    Stretchy.query(index: SPEC_INDEX)
   end
 
   def check(api)
@@ -17,8 +17,8 @@ describe 'merging queries' do
   subject { api }
 
   it 'can merge two filter queries' do
-    check subject.query(match: {_all: 'video'}).query(
-      api.query(match: {_all: 'sakurai'})
+    check subject.query(multi_match: {query: 'video'}).query(
+      api.query(multi_match: {query: 'sakurai'})
     )
   end
 

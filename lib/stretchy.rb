@@ -58,7 +58,7 @@ module Stretchy
   end
 
   def index_document(params = {})
-    Utils.require_params!(:index_document, params, :index, :type, :body)
+    Utils.require_params!(:index_document, params, :index, :body)
 
     raise IndexDoesNotExistError.new(
       "index #{params[:index]} does not exist"

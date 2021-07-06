@@ -7,14 +7,16 @@
     "failed": 0
   },
   "hits": {
-    "total": 3,
+    "total": {
+      "value": 3,
+      "relation": "eq"
+  },
     "max_score": 0.053604983,
     "hits": [
       {
         "_shard": 4,
         "_node": "zOl44WpdTNuEKuJXuqq5NA",
         "_index": "stretchy_test",
-        "_type": "game_dev",
         "_id": "3",
         "_score": 0.053604983,
         "_source": {
@@ -95,7 +97,6 @@
         "_shard": 2,
         "_node": "zOl44WpdTNuEKuJXuqq5NA",
         "_index": "stretchy_test",
-        "_type": "game_dev",
         "_id": "1",
         "_score": 0.033902764,
         "_source": {
@@ -179,7 +180,6 @@
         "_shard": 3,
         "_node": "zOl44WpdTNuEKuJXuqq5NA",
         "_index": "stretchy_test",
-        "_type": "game_dev",
         "_id": "2",
         "_score": 0.027122213,
         "_source": {

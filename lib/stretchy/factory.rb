@@ -94,7 +94,11 @@ module Stretchy
         when Hash
           nested(val, field, context)
         else
-          Node.new({match: {field => val}}, context)
+          if field == '_all' 
+            Node.new({multi_match: {:query => val}}, context)
+          else
+            Node.new({match: {field => val}}, context)
+          end
         end
       end
     end
@@ -133,18 +137,16 @@ module Stretchy
     def fulltext_nodes_from_string(params, context = default_context)
       subcontext = context.merge(query: true)
       nodes = [raw_node({
-        match: {
-          _all: {
+          multi_match: {
             query: params,
             minimum_should_match: 1
           }
-        }
       }, subcontext)]
 
       subcontext = subcontext.merge(should: true)
       nodes << Factory.raw_node({
         match_phrase: {
-          _all: {
+          multi_match: {
             query: params,
             slop:  DEFAULT_SLOP
           }
@@ -180,7 +182,7 @@ module Stretchy
 
     # https://www.elastic.co/guide/en/elasticsearch/reference/current/querydslfunctionscorequery.html#functionrandom
     def random_score_function_node(params, context = default_context)
-      json          = {random_score: {seed: params[:seed]}}
+      json          = {random_score: {seed: params[:seed], field: :id}}
       json[:weight] = params[:weight] if params[:weight]
       Node.new(json, context)
     end

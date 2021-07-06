@@ -5,7 +5,7 @@ describe 'Root actions' do
   let(:not_found) { fixture(:mizuguchi) }
   let(:extra)     { fixture(:suda) }
 
-  subject { Stretchy.query(index: SPEC_INDEX, type: FIXTURE_TYPE) }
+  subject { Stretchy.query(index: SPEC_INDEX) }
 
   it 'limits fields when specified' do
     subject.fields(:url_slug, :name).each do |result|
@@ -28,7 +28,7 @@ describe 'Root actions' do
   end
 
   specify 'explain' do
-    results = subject.explain.match(_all: found['name']).results
+    results = subject.explain.match(name: found['name']).results
     expect(results.first['_explanation']).to_not be_empty
   end
 

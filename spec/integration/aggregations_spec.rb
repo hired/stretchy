@@ -5,7 +5,7 @@ describe 'Aggregations' do
   let(:not_found) { fixture(:mizuguchi) }
   let(:extra) { fixture(:suda) }
 
-  subject { Stretchy.query(index: SPEC_INDEX, type: FIXTURE_TYPE) }
+  subject { Stretchy.query(index: SPEC_INDEX) }
 
   it 'uses a raw json hash' do
     q = subject.aggs(my_agg: {filter: {term: {url_slug: found['url_slug']}}})

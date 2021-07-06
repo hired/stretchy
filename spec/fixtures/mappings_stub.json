@@ -1,27 +1,27 @@
-{
-  "game_dev" : {
-    "properties" : {
-      "coords" : {"type" : "geo_point"},
-      "url_slug" : {"type" : "string", "index" : "not_analyzed"},
-      "games" : {
-        "type" : "nested",
-        "include_in_parent" : true,
-        "properties" : {
-          "comments" : {
-            "type" : "nested",
-            "properties" : {
-              "source" : {
-                "type" : "string",
-                "index" : "not_analyzed"
+{"properties": {
+  "coords": {
+      "type": "geo_point"
+  },
+  "games": {
+      "type": "nested",
+      "include_in_parent": true,
+      "properties": {
+          "comments": {
+              "type": "nested",
+              "properties": {
+                  "source": {
+                      "type": "keyword"
+                  }
               }
-            }
           },
-          "likes" : {
-            "type" : "nested",
-            "include_in_parent" : true
+          "likes": {
+              "type": "nested",
+              "include_in_parent": true
           }
-        }
       }
-    }
+  },
+  "url_slug": {
+      "type": "keyword"
   }
+}
 }

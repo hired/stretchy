@@ -21,7 +21,7 @@ describe 'Filters', :integration do
   end
 
   specify 'query filter' do
-    check_filter subject.filter.query(match: {_all: 'Gamecube'})
+    check_filter subject.filter.query(multi_match: {query: 'Gamecube'})
   end
 
   describe 'where filters' do
