@@ -5,7 +5,6 @@ require 'awesome_print'
 require 'pry'
 
 SPEC_INDEX    = 'stretchy_test'
-FIXTURE_TYPE  = 'game_dev'
 FIXTURES      = {}
 
 Gem.find_files('**/*.json').each do |path|
@@ -30,7 +29,6 @@ RSpec.configure do |config|
       next if name =~ /stub/
       Stretchy.index_document(
         index:  SPEC_INDEX,
-        type:   FIXTURE_TYPE,
         id:     data['id'],
         body:   data
       )
@@ -40,7 +38,7 @@ RSpec.configure do |config|
 end
 
 RSpec.shared_context 'integration specs', :integration do
-  let(:api) { Stretchy.query(index: SPEC_INDEX, type: FIXTURE_TYPE) }
+  let(:api) { Stretchy.query(index: SPEC_INDEX) }
   let(:found) { FIXTURES[:sakurai] }
   let(:not_found) { FIXTURES[:mizuguchi] }
   let(:extra) { FIXTURES[:suda] }

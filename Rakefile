@@ -13,8 +13,8 @@ namespace :fixtures do
   task :gen do
     require 'json'
 
-    q = Stretchy.query(index: 'stretchy_test', type: 'game_dev')
-          .match(_all: 'game')
+    q = Stretchy.query(index: 'stretchy_test')
+          .multi_match(query: 'game')
           .where(url_slug: [
             'masahiro-sakurai',
             'tetsuya-mizuguchi',

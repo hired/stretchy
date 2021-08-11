@@ -7,7 +7,7 @@ describe 'Highlights' do
   let(:name) { found['name'].split.first }
 
   subject do
-    Stretchy.query(index: SPEC_INDEX, type: FIXTURE_TYPE)
+    Stretchy.query(index: SPEC_INDEX)
       .match(name: name)
       .highlight(fields: {name: {}})
   end
